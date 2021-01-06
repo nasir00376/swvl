@@ -1,0 +1,37 @@
+{
+  "name": "notification",
+  "version": "1.0.0",
+  "description": "It allows to send Push Notifications and SMS to users",
+  "main": "./src/server.ts",
+  "scripts": {
+    "analyse": "npm run lint",
+    "clean": "rimraf .build",
+    "prebuild": "npm run clean",
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "DEBUG=notification:* node .build/server.js",
+    "dev": "nodemon",
+    "lint": "tslint --project . --format verbose",
+    "debug": "DEBUG=*"
+  },
+  "author": "Nasir Abbas",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "debug": "^4.3.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.10",
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.5",
+    "@types/express": "^4.17.9",
+    "@types/mongodb": "^3.6.3",
+    "@types/mongoose": "^5.10.3",
+    "@types/node": "^14.14.20",
+    "nodemon": "^2.0.6",
+    "ts-node": "^9.1.1",
+    "tslint": "^6.1.3",
+    "typescript": "^4.1.3"
+  }
+}
