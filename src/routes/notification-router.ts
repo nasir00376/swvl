@@ -2,6 +2,10 @@ import { Router, Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 import { RequestValidationError } from "../error";
 
+import { DomainEventPublisher, DummyDestinationHandler } from '../domain-events';
+
+const domainEventsPublisher = new DomainEventPublisher(new DummyDestinationHandler());
+
 const router: Router = Router();
 
 router.post(
@@ -19,7 +23,8 @@ router.post(
       throw new RequestValidationError(errors.array());
     }
 
-    res.send({});
+    domainEventsPublisher.publish([req.body]);
+    res.send(req.body);
   }
 );
 

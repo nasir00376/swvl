@@ -9,8 +9,11 @@ import { connectDB } from './config/db';
 import { routes } from './routes';
 import { NotFoundError } from './error';
 import { errorHandler } from './middlewares/error.handler';
+import { DomainEventListener } from './domain-events';
 
 dotenv.config();
+// Listen for domain events
+DomainEventListener.listen();
 
 const debug: Debug.IDebugger = Debug('notification:app');
 
