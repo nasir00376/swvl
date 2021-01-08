@@ -6,7 +6,7 @@ import 'express-async-errors';
 import * as dotenv from 'dotenv';
 import { json, urlencoded } from 'body-parser';
 import { connectDB } from './config/db';
-// import { routes } from './routes';
+import { routes } from './routes';
 import { NotFoundError } from './error';
 import { errorHandler } from './middlewares/error.handler';
 
@@ -24,7 +24,7 @@ connectDB()
 app.use(json());
 app.use(urlencoded({ extended: false }));
 // Use routes as middlewares
-// routes(app);
+routes(app);
 
 
 app.all('*', async (req, res) => {
