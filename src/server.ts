@@ -2,6 +2,10 @@ import { json, urlencoded } from 'body-parser';
 import Debug from 'debug';
 import express from 'express';
 
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
 import { connectDB } from './config/db';
 
 // import { routes } from './routes';

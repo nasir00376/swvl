@@ -9,16 +9,16 @@
     "prebuild": "npm run clean",
     "build": "tsc",
     "prestart": "npm run build",
-    "start": "DEBUG=notification:* node .build/server.js",
-    "dev": "nodemon",
-    "lint": "tslint --project . --format verbose",
-    "debug": "DEBUG=*"
+    "start": "node .build/server.js",
+    "dev": "DEBUG=notification:* nodemon",
+    "lint": "tslint --project . --format verbose"
   },
   "author": "Nasir Abbas",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "debug": "^4.3.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.11.10",
     "rimraf": "^3.0.2"
