@@ -1,0 +1,149 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "API specification of Notification service.\n",
+    "version": "1",
+    "title": "SWVL API for Notification"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4554/api",
+      "description": "Local Notification service."
+    }
+  ],
+  "paths": {
+    "/notifcation": {
+      "post": {
+        "tags": [
+          "SWVL API / Notification"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "summary": "Create a new notification\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "description": "A body of notification that should be sent to customer\n",
+                    "type": "string",
+                    "example": "Your account has been verified."
+                  },
+                  "type": {
+                    "description": "A type of notification that describes it should be sent in group of or each customer\n",
+                    "type": "string",
+                    "enum": [
+                      "single",
+                      "group"
+                    ]
+                  }
+                },
+                "required": [
+                  "text",
+                  "type"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result set containing the single record\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "allOf": [
+                        {
+                          "$ref": "#/paths/~1notifcation/post/requestBody/content/application~1json/schema"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "example": "created",
+                              "enum": [
+                                "created",
+                                "pending",
+                                "sent"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/paths/~1notifcation/get/responses/400"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SWVL API / Notification"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "summary": "Get a list of notifications\n",
+        "responses": {
+          "200": {
+            "description": "Result set containing array of notifications objects\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "allOf": [
+                          {
+                            "$ref": "#/paths/~1notifcation/post/requestBody/content/application~1json/schema"
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "status": {
+                                "type": "string",
+                                "example": "created",
+                                "enum": [
+                                  "created",
+                                  "pending",
+                                  "sent"
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request could not be understood by the server due to malformed syntax\n"
+          }
+        }
+      }
+    }
+  }
+}
+

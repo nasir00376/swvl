@@ -1,0 +1,16 @@
+openapi: 3.0.0
+
+info:
+  description: |
+    API specification of Notification service.
+  version: "1"
+  title: SWVL API for Notification
+
+servers:
+  - url: "http://localhost:4554/api"
+    description: Local Notification service.
+
+paths:
+  # Notifications
+  /notifcation:
+    $ref: "./notification/notification.yml"
