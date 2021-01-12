@@ -1,4 +1,5 @@
 export interface DomainEvent {
-    type: string;
+    eventType: string;
     text: string;
+    notificationType: 'sms' | 'push'
 }

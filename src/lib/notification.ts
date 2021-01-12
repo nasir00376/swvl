@@ -1,6 +1,10 @@
 import { DomainEvent } from "../domain-events/domain-event.types";
-import em from "../domain-events/event-emitter";
+import { INotification } from "./notification.interface";
 
-interface Notification {
-  send(data: DomainEvent): Boolean;
+export class Notification implements INotification {
+  constructor(private currentNotification: INotification) {}
+
+  send(data: DomainEvent): Boolean {
+    return this.currentNotification.send(data);
+  }
 }

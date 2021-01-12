@@ -38,10 +38,10 @@ export class DomainEventPublisher {
         debug("Started processing event");
         const result =  this.destinationHandler.handle(event);
         if (!result) {
-          debug("Failed to publish domain event with type: %s", event.type);
+          debug("Failed to publish domain event with type: %s", event.eventType);
           throw new Error("Failed to publish domain events collection");
         }
-        debug("Successfully published event with type: %s", event.type);
+        debug("Successfully published event with type: %s", event.eventType);
         return true;
       });
   }

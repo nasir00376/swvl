@@ -13,7 +13,7 @@ export class DummyDestinationHandler implements DestinationHandler {
    * @return {Promise}
    */
   handle(event: DomainEvent) {
-    em.emit(event.type, event);
+    em.emit(event.eventType, event);
     return true;
   }
 }

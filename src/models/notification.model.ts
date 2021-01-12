@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 
 // An interface that describes the properties that are required to create new Notification;
 interface NotificationAttrs {
-  email: string;
+  text: string;
+  type: "single" | "group",
+  notificationType: "sms" | "push"
 }
 
 // An interface that describes the properties that a Notification model has.
@@ -14,7 +16,10 @@ interface NotificationModel extends mongoose.Model<NotificationDoc> {
 //  Properties a single Notification has.
 
 interface NotificationDoc extends mongoose.Document {
-  email: string;
+  text: string;
+  status: "created" | "sent";
+  type: "single" | "group",
+  notificationType: "sms" | "push"
 }
 
 const notificationSchema = new mongoose.Schema({
@@ -24,13 +29,18 @@ const notificationSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["created", "pending", "sent"],
+    enum: ["created", "sent"],
     default: "created",
   },
   type: {
     type: String,
     required: true,
     enum: ["single", "group"],
+  },
+  notificationType: {
+    type: String,
+    required: true,
+    enum: ["sms", "push"],
   },
 });
 

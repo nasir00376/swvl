@@ -3,6 +3,7 @@ import { body, validationResult } from "express-validator";
 import { RequestValidationError } from "../error";
 
 import { DomainEventPublisher, DummyDestinationHandler } from '../domain-events';
+import { Notification } from '../models/notification.model';
 
 const domainEventsPublisher = new DomainEventPublisher(new DummyDestinationHandler());
 
@@ -15,6 +16,7 @@ router.post(
       .isString()
       .withMessage("Text body for a notification is required."),
     body("type").isString().withMessage("Type of notification is required."),
+    body("notificationType").isString().withMessage("notificationType is required."),
   ],
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
@@ -23,8 +25,20 @@ router.post(
       throw new RequestValidationError(errors.array());
     }
 
-    domainEventsPublisher.publish([req.body]);
-    res.send(req.body);
+    const { type, text, notificationType } = req.body;
+
+    const notification = Notification.build({
+      type,
+      text,
+      notificationType
+    });
+
+    // To save in db: Uncomment
+
+    // await notification.save();
+
+    domainEventsPublisher.publish([{ eventType: 'created', ...req.body }]);
+    res.send(notification);
   }
 );
 
