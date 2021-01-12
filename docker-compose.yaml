@@ -1,0 +1,14 @@
+version: "3"
+
+services:    
+  web:
+    build: .
+    command:
+      [npm,"start"]
+    volumes: 
+      - "./src/:/src/"
+    restart: always
+    ports: 
+      - "4554:4554"
+    env_file:
+      - .docker.env
