@@ -12,5 +12,5 @@ servers:
 
 paths:
   # Notifications
-  /notifcation:
+  /notification:
     $ref: "./notification/notification.yml"

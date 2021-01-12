@@ -38,6 +38,14 @@ components:
           enum:
             - single
             - group
+        notificationType:
+          description: >
+            Describes type of notification a push or sms
+          type: string
+          example: "sms"
+          enum:
+            - sms
+            - push
         
       required:
         - text

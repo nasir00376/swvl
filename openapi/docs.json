@@ -12,7 +12,7 @@
     }
   ],
   "paths": {
-    "/notifcation": {
+    "/notification": {
       "post": {
         "tags": [
           "SWVL API / Notification"
@@ -42,6 +42,15 @@
                       "single",
                       "group"
                     ]
+                  },
+                  "notificationType": {
+                    "description": "Describes type of notification a push or sms\n",
+                    "type": "string",
+                    "example": "sms",
+                    "enum": [
+                      "sms",
+                      "push"
+                    ]
                   }
                 },
                 "required": [
@@ -63,7 +72,7 @@
                     "result": {
                       "allOf": [
                         {
-                          "$ref": "#/paths/~1notifcation/post/requestBody/content/application~1json/schema"
+                          "$ref": "#/paths/~1notification/post/requestBody/content/application~1json/schema"
                         },
                         {
                           "type": "object",
@@ -87,7 +96,7 @@
             }
           },
           "400": {
-            "$ref": "#/paths/~1notifcation/get/responses/400"
+            "$ref": "#/paths/~1notification/get/responses/400"
           }
         }
       },
@@ -114,7 +123,7 @@
                       "items": {
                         "allOf": [
                           {
-                            "$ref": "#/paths/~1notifcation/post/requestBody/content/application~1json/schema"
+                            "$ref": "#/paths/~1notification/post/requestBody/content/application~1json/schema"
                           },
                           {
                             "type": "object",
