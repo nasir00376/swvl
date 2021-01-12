@@ -10,6 +10,7 @@ import { routes } from './routes';
 import { NotFoundError } from './error';
 import { errorHandler } from './middlewares/error.handler';
 import { DomainEventListener } from './domain-events';
+import path from 'path';
 
 dotenv.config();
 // Listen for domain events
@@ -24,6 +25,9 @@ connectDB()
     .catch((error: Error) => debug('Error while db connection', error.message));
 
 // Middlewares
+app.use("/docs", (req, res) => {
+  res.sendFile(path.join(__dirname + '/../openapi/redoc.html'));
+});
 app.use(json());
 app.use(urlencoded({ extended: false }));
 // Use routes as middlewares
